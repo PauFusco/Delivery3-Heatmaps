@@ -28,6 +28,9 @@ public class DataCollector : MonoBehaviour, IMessageReceiver
 			case MessageType.DAMAGED:
 				//ApplyDamage((Damageable.DamageMessage)msg);
 				break;
+			case MessageType.RESPAWN:
+				//OnRespawnReceived();
+				break;
 			default:
 				break;
 		}
