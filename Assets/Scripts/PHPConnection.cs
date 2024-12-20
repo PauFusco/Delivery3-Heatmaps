@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -22,8 +21,23 @@ public class PHPConnection : MonoBehaviour
         else
         {
             uint callbackData = uint.Parse(webRequest.downloadHandler.text);
-
             callback?.Invoke(callbackData);
         }
+    }
+
+    private void SendDeath()
+    {
+        // death id
+        // time (float Time.time)
+        // position
+        // reason of death
+    }
+
+    private void SendKill()
+    {
+        // kill id
+        // time (float Time.time)
+        // position
+        // killed enemy
     }
 }
