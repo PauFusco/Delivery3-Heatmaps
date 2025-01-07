@@ -20,7 +20,6 @@ namespace Gamekit3D
             //editor only as it's only used in editor to display the path of the attack that is used by the raycast
             [NonSerialized] public List<Vector3> previousPositions = new List<Vector3>();
 #endif
-
         }
 
         public ParticleSystem hitParticlePrefab;
@@ -47,7 +46,7 @@ namespace Gamekit3D
         protected bool m_IsThrowingHit = false;
         protected bool m_InAttack = false;
 
-        const int PARTICLE_COUNT = 10;
+        private const int PARTICLE_COUNT = 10;
         protected ParticleSystem[] m_ParticlesPool = new ParticleSystem[PARTICLE_COUNT];
         protected int m_CurrentParticle = 0;
 
@@ -68,7 +67,6 @@ namespace Gamekit3D
 
         private void OnEnable()
         {
-
         }
 
         //whoever own the weapon is responsible for calling that. Allow to avoid "self harm"
@@ -104,7 +102,6 @@ namespace Gamekit3D
         {
             m_InAttack = false;
 
-
 #if UNITY_EDITOR
             for (int i = 0; i < attackPoints.Length; ++i)
             {
@@ -126,11 +123,10 @@ namespace Gamekit3D
 
                     if (attackVector.magnitude < 0.001f)
                     {
-                        // A zero vector for the sphere cast don't yield any result, even if a collider overlap the "sphere" created by radius. 
+                        // A zero vector for the sphere cast don't yield any result, even if a collider overlap the "sphere" created by radius.
                         // so we set a very tiny microscopic forward cast to be sure it will catch anything overlaping that "stationary" sphere cast
                         attackVector = Vector3.forward * 0.0001f;
                     }
-
 
                     Ray r = new Ray(worldPos, attackVector.normalized);
 
@@ -176,11 +172,11 @@ namespace Gamekit3D
             {
                 var renderer = other.GetComponent<Renderer>();
                 if (!renderer)
-                    renderer = other.GetComponentInChildren<Renderer> ();
+                    renderer = other.GetComponentInChildren<Renderer>();
                 if (renderer)
-                    hitAudio.PlayRandomClip (renderer.sharedMaterial);
+                    hitAudio.PlayRandomClip(renderer.sharedMaterial);
                 else
-                    hitAudio.PlayRandomClip ();
+                    hitAudio.PlayRandomClip();
             }
 
             Damageable.DamageMessage data;
@@ -191,6 +187,8 @@ namespace Gamekit3D
             data.damageSource = m_Owner.transform.position;
             data.throwing = m_IsThrowingHit;
             data.stopCamera = false;
+
+            data.time = Time.time;
 
             d.ApplyDamage(data);
 

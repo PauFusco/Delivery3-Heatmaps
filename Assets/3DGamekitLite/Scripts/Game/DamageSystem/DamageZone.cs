@@ -29,9 +29,10 @@ namespace Gamekit3D
                 damager = this,
                 direction = Vector3.up,
                 stopCamera = stopCamera
+                time = Time.time
             };
 
             d.ApplyDamage(msg);
         }
-    } 
+    }
 }

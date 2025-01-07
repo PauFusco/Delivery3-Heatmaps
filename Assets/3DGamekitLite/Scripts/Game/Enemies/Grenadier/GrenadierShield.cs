@@ -32,6 +32,7 @@ namespace Gamekit3D
             data.damager = this;
             data.stopCamera = false;
             data.throwing = true;
+            data.time = Time.time;
 
             int count = Physics.OverlapSphereNonAlloc(transform.position, m_Collider.radius * transform.localScale.x,
                 sOverlapCache, m_PlayerMask);
