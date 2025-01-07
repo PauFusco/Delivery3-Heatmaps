@@ -2,6 +2,7 @@ using Gamekit3D;
 using Gamekit3D.Message;
 using System;
 using System.Collections;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -9,7 +10,7 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
 {
     public void OnReceiveMessage(MessageType type, object sender, object msg)
     {
-        GameObject senderObj = sender as GameObject;
+        Damageable senderObj = (Damageable)sender;
         Damageable.DamageMessage dmgmsg = (Damageable.DamageMessage)msg;
 
         switch (type)
@@ -28,7 +29,7 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
         }
     }
 
-    private IEnumerator PHPWebRequest(WWWForm form, string link, Action<uint> callback)
+    private IEnumerator PHPWebRequest(WWWForm form, string link)
     {
         UnityWebRequest webRequest = UnityWebRequest.Post(link, form);
 
@@ -36,16 +37,33 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
 
         if (webRequest.result != UnityWebRequest.Result.Success)
         {
+            // php request error handling
+            Debug.Log(webRequest.responseCode);
         }
         else
         {
-            uint callbackData = uint.Parse(webRequest.downloadHandler.text);
-            callback?.Invoke(callbackData);
+            Debug.Log(webRequest.responseCode);
         }
     }
 
     public void SendDamaged(Vector3 position, float time, DamagerType type)
     {
+        string sendablePositionX = position.x.ToString(CultureInfo.InvariantCulture);
+        string sendablePositionY = position.y.ToString(CultureInfo.InvariantCulture);
+        string sendablePositionZ = position.z.ToString(CultureInfo.InvariantCulture);
+        string sendableTime = time.ToString(CultureInfo.InvariantCulture);
+        string sendableType = ((int)type).ToString();
+
+        WWWForm form = new();
+        form.AddField("X", sendablePositionX);
+        form.AddField("Y", sendablePositionY);
+        form.AddField("Z", sendablePositionZ);
+        form.AddField("Time", sendableTime);
+        form.AddField("Type", sendableType);
+
+        string requestLink = "https://citmalumnes.upc.es/~victormb3/DAMAGED.php";
+
+        StartCoroutine(PHPWebRequest(form, requestLink));
     }
 
     public void SendDeath(Vector3 position, float time, DamagerType type)
