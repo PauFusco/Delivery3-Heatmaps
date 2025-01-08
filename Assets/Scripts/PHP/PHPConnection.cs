@@ -1,6 +1,5 @@
 using Gamekit3D;
 using Gamekit3D.Message;
-using System;
 using System.Collections;
 using System.Globalization;
 using UnityEngine;
@@ -20,7 +19,7 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
                 break;
 
             case MessageType.DEAD:
-
+                SendDeath(senderObj.transform.position, dmgmsg.time, 0);
                 break;
 
             case MessageType.RESPAWN:
@@ -37,16 +36,15 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
 
         if (webRequest.result != UnityWebRequest.Result.Success)
         {
-            // php request error handling
-            Debug.Log(webRequest.responseCode);
+            Debug.Log(webRequest.downloadHandler.text);
         }
         else
         {
-            Debug.Log(webRequest.responseCode);
+            Debug.Log(webRequest.downloadHandler.text);
         }
     }
 
-    public void SendDamaged(Vector3 position, float time, DamagerType type)
+    private void SendDamaged(Vector3 position, float time, DamagerType type)
     {
         string sendablePositionX = position.x.ToString(CultureInfo.InvariantCulture);
         string sendablePositionY = position.y.ToString(CultureInfo.InvariantCulture);
@@ -66,11 +64,24 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
         StartCoroutine(PHPWebRequest(form, requestLink));
     }
 
-    public void SendDeath(Vector3 position, float time, DamagerType type)
+    private void SendDeath(Vector3 position, float time, DamagerType type)
     {
-        // time (float Time.time)
-        // position
-        // reason of death
+        string sendablePositionX = position.x.ToString(CultureInfo.InvariantCulture);
+        string sendablePositionY = position.y.ToString(CultureInfo.InvariantCulture);
+        string sendablePositionZ = position.z.ToString(CultureInfo.InvariantCulture);
+        string sendableTime = time.ToString(CultureInfo.InvariantCulture);
+        string sendableType = ((int)type).ToString();
+
+        WWWForm form = new();
+        form.AddField("X", sendablePositionX);
+        form.AddField("Y", sendablePositionY);
+        form.AddField("Z", sendablePositionZ);
+        form.AddField("Time", sendableTime);
+        form.AddField("Type", sendableType);
+
+        string requestLink = "https://citmalumnes.upc.es/~victormb3/DEATH.php";
+
+        StartCoroutine(PHPWebRequest(form, requestLink));
     }
 
     private void SendKill()
@@ -79,5 +90,23 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
         // time (float Time.time)
         // position
         // killed enemy
+    }
+
+    public void SendPosition(Vector3 position, float time)
+    {
+        string sendablePositionX = position.x.ToString(CultureInfo.InvariantCulture);
+        string sendablePositionY = position.y.ToString(CultureInfo.InvariantCulture);
+        string sendablePositionZ = position.z.ToString(CultureInfo.InvariantCulture);
+        string sendableTime = time.ToString(CultureInfo.InvariantCulture);
+
+        WWWForm form = new();
+        form.AddField("X", sendablePositionX);
+        form.AddField("Y", sendablePositionY);
+        form.AddField("Z", sendablePositionZ);
+        form.AddField("Time", sendableTime);
+
+        string requestLink = "https://citmalumnes.upc.es/~victormb3/POSITION.php";
+
+        StartCoroutine(PHPWebRequest(form, requestLink));
     }
 }

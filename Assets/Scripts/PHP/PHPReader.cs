@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,6 +10,8 @@ public class PHPReader : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             ReadHits();
+            ReadDeaths();
+            ReadPositions();
         }
     }
 
@@ -31,11 +32,27 @@ public class PHPReader : MonoBehaviour
         }
     }
 
-    public void ReadHits()
+    private void ReadHits()
     {
         string requestLink = "https://citmalumnes.upc.es/~victormb3/HITSREADER.php";
 
         string filePath = Application.dataPath + "/JSONResponse/hits.json";
+        StartCoroutine(PHPWebRequest(requestLink, filePath));
+    }
+
+    private void ReadDeaths()
+    {
+        string requestLink = "https://citmalumnes.upc.es/~victormb3/DEATHSREADER.php";
+
+        string filePath = Application.dataPath + "/JSONResponse/deaths.json";
+        StartCoroutine(PHPWebRequest(requestLink, filePath));
+    }
+
+    private void ReadPositions()
+    {
+        string requestLink = "https://citmalumnes.upc.es/~victormb3/POSITIONSREADER.php";
+
+        string filePath = Application.dataPath + "/JSONResponse/positions.json";
         StartCoroutine(PHPWebRequest(requestLink, filePath));
     }
 }

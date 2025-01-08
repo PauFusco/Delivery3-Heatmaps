@@ -25,7 +25,7 @@ if ($conn->query($sql) === TRUE) {
   echo "Valid connection";
 
 } else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+  echo "Error: " . $sql . "\n". $conn->error;
 }
 
 $conn->close();
