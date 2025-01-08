@@ -9,13 +9,18 @@ public class PHPReader : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            ReadHits();
-            ReadDeaths();
-            ReadPositions();
+            ReadAll();
         }
     }
 
-    private IEnumerator PHPWebRequest(string link, string fileToWritePath)
+    public void ReadAll()
+    {
+		ReadHits();
+		ReadDeaths();
+		ReadPositions();
+	}
+
+	private IEnumerator PHPWebRequest(string link, string fileToWritePath)
     {
         UnityWebRequest webRequest = UnityWebRequest.Get(link);
 
