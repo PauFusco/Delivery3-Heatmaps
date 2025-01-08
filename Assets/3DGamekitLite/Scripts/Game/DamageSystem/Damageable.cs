@@ -9,15 +9,15 @@ namespace Gamekit3D
 {
     public partial class Damageable : MonoBehaviour
     {
-
         public int maxHitPoints;
+
         [Tooltip("Time that this gameObject is invulnerable for, after receiving damage.")]
         public float invulnerabiltyTime;
-
 
         [Tooltip("The angle from the which that damageable is hitable. Always in the world XZ plane, with the forward being rotate by hitForwardRoation")]
         [Range(0.0f, 360.0f)]
         public float hitAngle = 360.0f;
+
         [Tooltip("Allow to rotate the world forward vector of the damageable used to define the hitAngle zone")]
         [Range(0.0f, 360.0f)]
         [FormerlySerializedAs("hitForwardRoation")] //SHAME!
@@ -35,15 +35,15 @@ namespace Gamekit3D
         protected float m_timeSinceLastHit = 0.0f;
         protected Collider m_Collider;
 
-        System.Action schedule;
+        private System.Action schedule;
 
-        void Start()
+        private void Start()
         {
             ResetDamage();
             m_Collider = GetComponent<Collider>();
         }
 
-        void Update()
+        private void Update()
         {
             if (isInvulnerable)
             {
@@ -110,7 +110,7 @@ namespace Gamekit3D
             }
         }
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             if (schedule != null)
             {
@@ -120,6 +120,7 @@ namespace Gamekit3D
         }
 
 #if UNITY_EDITOR
+
         private void OnDrawGizmosSelected()
         {
             Vector3 forward = transform.forward;
@@ -132,12 +133,11 @@ namespace Gamekit3D
                     EventType.Repaint);
             }
 
-
             UnityEditor.Handles.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
             forward = Quaternion.AngleAxis(-hitAngle * 0.5f, transform.up) * forward;
             UnityEditor.Handles.DrawSolidArc(transform.position, transform.up, forward, hitAngle, 1.0f);
         }
+
 #endif
     }
-
 }

@@ -20,6 +20,7 @@ namespace Gamekit3D
         public float explosionRadius;
         public float explosionTimer;
         public ParticleSystem explosionVFX;
+
         [Tooltip("Will the explosion VFX play where the grenade explode or on the closest ground")]
         public bool vfxOnGround = false;
 
@@ -31,14 +32,14 @@ namespace Gamekit3D
         protected RangeWeapon m_Shooter;
         protected Rigidbody m_RigidBody;
         protected ParticleSystem m_VFXInstance;
-        int m_EnvironmentLayer = -1;
-        
+        private int m_EnvironmentLayer = -1;
+
         protected static Collider[] m_ExplosionHitCache = new Collider[32];
 
         private void Awake()
         {
             m_EnvironmentLayer = 1 << LayerMask.NameToLayer("Environment");
-            
+
             m_RigidBody = GetComponent<Rigidbody>();
             m_RigidBody.detectCollisions = false;
 
@@ -59,7 +60,6 @@ namespace Gamekit3D
 
             m_Shooter = shooter;
 
-
             m_RigidBody.velocity = GetVelocity(target);
             m_RigidBody.AddRelativeTorque(Vector3.right * -5500.0f);
 
@@ -74,7 +74,7 @@ namespace Gamekit3D
 
             if (m_SinceFired > 0.2f)
             {
-                //we only enable collision after half a second to get it time to clear the grenadier body 
+                //we only enable collision after half a second to get it time to clear the grenadier body
                 m_RigidBody.detectCollisions = true;
             }
 
@@ -101,9 +101,9 @@ namespace Gamekit3D
                 damageSource = transform.position,
                 damager = this,
                 stopCamera = false,
-                throwing = true
+                throwing = true,
+                time = Time.time
             };
-
 
             for (int i = 0; i < count; ++i)
             {
@@ -184,16 +184,18 @@ namespace Gamekit3D
                 case ShotType.HIGHEST_SHOT:
                     T = T_max;
                     break;
+
                 case ShotType.LOWEST_SPEED:
                     T = T_lowEnergy;
                     break;
+
                 case ShotType.MOST_DIRECT:
                     T = T_min;
                     break;
+
                 default:
                     break;
             }
-
 
             // Convert from time-to-hit to a launch velocity:
             velocity = toTarget / T - Physics.gravity * T / 2f;

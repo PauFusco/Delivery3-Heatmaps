@@ -13,6 +13,8 @@ namespace Gamekit3D
             public bool throwing;
 
             public bool stopCamera;
+
+            public float time;
         }
-    } 
+    }
 }
