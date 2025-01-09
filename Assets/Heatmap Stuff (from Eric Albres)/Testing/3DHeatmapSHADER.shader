@@ -1,4 +1,4 @@
-Shader "Unlit/WorldPosFromDepth"
+Shader "Unlit/3DHeatmapSHADER"
 {
     Properties
     {

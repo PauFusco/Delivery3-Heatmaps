@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestingApplyPointsToHeatmap : MonoBehaviour
+public class ApplyPointsToHeatmap : MonoBehaviour
 {
 	Material mMaterial;
 	MeshRenderer mMeshRenderer;
