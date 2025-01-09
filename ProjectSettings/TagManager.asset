@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - FlythroughCam
+  - HeatmapProjectile
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 512x512_green
-  m_Shader: {fileID: 4800000, guid: 1fd7fc3568bc3a04997be49b85cf71a3, type: 3}
+  m_Shader: {fileID: 4800000, guid: 37530f671eec17e4d9e9ba98448c6166, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -64,7 +64,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Diameter: 20.5
+    - _Diameter: 5
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
