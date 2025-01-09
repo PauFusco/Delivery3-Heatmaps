@@ -39,7 +39,38 @@ public class HeatmapsWindow : EditorWindow
         if (GUILayout.Button("Generate Heatmap")) { GenerateHeatmap(); }
 		toInstantiate = (GameObject)EditorGUILayout.ObjectField("To Instantiate", toInstantiate, typeof(GameObject), true);
 
-        int toDelete = -1;
+		if (GUILayout.Button("Deserialize Positions"))
+		{
+			positions.Clear();
+			HMRootPositions hmPositions = JSONHeatmapDeserializer.DeserializePositionsJSON();
+			foreach (var pos in hmPositions.positions)
+			{
+				positions.Add(new Vector3(pos.pos_x, pos.pos_y, pos.pos_z));
+			}
+		}
+
+		if (GUILayout.Button("Deserialize Deaths"))
+		{
+			positions.Clear();
+			HMRootDeaths hmDeaths = JSONHeatmapDeserializer.DeserializeDeathsJSON();
+			foreach (var death in hmDeaths.deaths)
+			{
+				positions.Add(new Vector3(death.pos_x, death.pos_y, death.pos_z));
+			}
+		}
+
+		if (GUILayout.Button("Deserialize Hits"))
+		{
+			positions.Clear();
+			HMRootHits hmHits = JSONHeatmapDeserializer.DeserializeHitsJSON();
+			foreach (var hit in hmHits.hits)
+			{
+				positions.Add(new Vector3(hit.pos_x, hit.pos_y, hit.pos_z));
+			}
+		}
+
+
+		int toDelete = -1;
 
         for (int i = 0; i < positions.Count; ++i)
         {
@@ -56,13 +87,7 @@ public class HeatmapsWindow : EditorWindow
 
 		if (GUILayout.Button("+")) { positions.Add(new Vector3(0, 0, 0)); }
 
-		if (GUILayout.Button("Deserialize Positions")) { 
-            HeatmapPositions hmPositions = JSONHeatmapDeserializer.DeserializePositionsJSON();
-            foreach (var pos in hmPositions.positions) 
-            {
-                positions.Add(new Vector3(pos.pos_x, pos.pos_y, pos.pos_z));
-            }
-        }
+
 	}
 
 	struct HeatmapSphere
