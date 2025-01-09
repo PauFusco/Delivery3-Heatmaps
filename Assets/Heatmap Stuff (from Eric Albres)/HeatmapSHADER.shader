@@ -133,7 +133,7 @@ Shader "Unlit/HeatmapSHADER"
         {
           float area_of_effect_size = _Diameter;
 
-          return  pow(max(0.0, 1.0 - distance(a, b) / area_of_effect_size), 2.0);
+          return pow(max(0.0, 1.0 - distance(a, b) / area_of_effect_size), 2.0);
         }
 
 
