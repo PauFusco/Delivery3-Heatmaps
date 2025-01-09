@@ -15,11 +15,11 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
         switch (type)
         {
             case MessageType.DAMAGED:
-                SendDamaged(senderObj.transform.position, dmgmsg.time, 0);
+                SendDamaged(senderObj.transform.position, dmgmsg.time, dmgmsg.damagerType);
                 break;
 
             case MessageType.DEAD:
-                SendDeath(senderObj.transform.position, dmgmsg.time, 0);
+                SendDeath(senderObj.transform.position, dmgmsg.time, dmgmsg.damagerType);
                 break;
 
             case MessageType.RESPAWN:

@@ -188,6 +188,12 @@ namespace Gamekit3D
             data.throwing = m_IsThrowingHit;
             data.stopCamera = false;
 
+            DamagerType tempDamagerType = DamagerType.UNDEFINED;
+            Damager damager = GetComponentInParent<Damager>();
+            if (damager != null) { tempDamagerType = damager.type; }
+
+            data.damagerType = tempDamagerType;
+
             data.time = Time.time;
 
             d.ApplyDamage(data);

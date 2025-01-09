@@ -95,6 +95,10 @@ namespace Gamekit3D
             int count = Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, m_ExplosionHitCache,
                 damageMask.value);
 
+            DamagerType tempDamagerType = DamagerType.UNDEFINED;
+            Damager damager = GetComponentInParent<Damager>();
+            if (damager != null) { tempDamagerType = damager.type; }
+
             Damageable.DamageMessage message = new Damageable.DamageMessage
             {
                 amount = damageAmount,
@@ -102,7 +106,8 @@ namespace Gamekit3D
                 damager = this,
                 stopCamera = false,
                 throwing = true,
-                time = Time.time
+                time = Time.time,
+                damagerType = tempDamagerType
             };
 
             for (int i = 0; i < count; ++i)

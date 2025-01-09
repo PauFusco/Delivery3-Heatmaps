@@ -23,13 +23,18 @@ namespace Gamekit3D
             if (d == null)
                 return;
 
+            DamagerType tempDamagerType = DamagerType.UNDEFINED;
+            Damager damager = GetComponentInParent<Damager>();
+            if (damager != null) { tempDamagerType = damager.type; }
+
             var msg = new Damageable.DamageMessage()
             {
                 amount = damageAmount,
                 damager = this,
                 direction = Vector3.up,
                 stopCamera = stopCamera,
-                time = Time.time
+                time = Time.time,
+                damagerType = tempDamagerType
             };
 
             d.ApplyDamage(msg);

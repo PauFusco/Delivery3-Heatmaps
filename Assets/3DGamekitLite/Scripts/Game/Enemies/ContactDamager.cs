@@ -26,14 +26,18 @@ Also Remember to place that object in a layer that collide with what you want to
 
             if (d != null && !d.isInvulnerable)
             {
-                Damageable.DamageMessage message = new Damageable.DamageMessage
+                DamagerType tempDamagerType = DamagerType.UNDEFINED;
+                if (TryGetComponent<Damager>(out var damager)) { tempDamagerType = damager.type; }
+
+                Damageable.DamageMessage message = new()
                 {
                     damageSource = transform.position,
                     damager = this,
                     amount = amount,
                     direction = (other.transform.position - transform.position).normalized,
                     throwing = false,
-                    time = Time.time
+                    time = Time.time,
+                    damagerType = tempDamagerType
                 };
 
                 d.ApplyDamage(message);

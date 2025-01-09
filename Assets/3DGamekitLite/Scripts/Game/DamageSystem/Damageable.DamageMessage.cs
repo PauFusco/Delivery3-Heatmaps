@@ -15,6 +15,7 @@ namespace Gamekit3D
             public bool stopCamera;
 
             public float time;
+            public DamagerType damagerType;
         }
     }
 }

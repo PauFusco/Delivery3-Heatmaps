@@ -34,6 +34,12 @@ namespace Gamekit3D
             data.throwing = true;
             data.time = Time.time;
 
+            DamagerType tempDamagerType = DamagerType.UNDEFINED;
+            Damager damager = GetComponentInParent<Damager>();
+            if (damager != null) { tempDamagerType = damager.type; }
+
+            data.damagerType = tempDamagerType;
+
             int count = Physics.OverlapSphereNonAlloc(transform.position, m_Collider.radius * transform.localScale.x,
                 sOverlapCache, m_PlayerMask);
 
