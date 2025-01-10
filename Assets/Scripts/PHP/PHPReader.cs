@@ -15,12 +15,14 @@ public class PHPReader : MonoBehaviour
 
     public void ReadAll()
     {
-		ReadHits();
-		ReadDeaths();
-		ReadPositions();
-	}
+        ReadHits();
+        ReadDeaths();
+        ReadPositions();
+        ReadAttacks();
+        ReadDefeats();
+    }
 
-	private IEnumerator PHPWebRequest(string link, string fileToWritePath)
+    private IEnumerator PHPWebRequest(string link, string fileToWritePath)
     {
         UnityWebRequest webRequest = UnityWebRequest.Get(link);
 
@@ -58,6 +60,22 @@ public class PHPReader : MonoBehaviour
         string requestLink = "https://citmalumnes.upc.es/~victormb3/POSITIONSREADER.php";
 
         string filePath = Application.dataPath + "/JSONResponse/positions.json";
+        StartCoroutine(PHPWebRequest(requestLink, filePath));
+    }
+
+    private void ReadAttacks()
+    {
+        string requestLink = "https://citmalumnes.upc.es/~victormb3/ATTACKSREADER.php";
+
+        string filePath = Application.dataPath + "/JSONResponse/attacks.json";
+        StartCoroutine(PHPWebRequest(requestLink, filePath));
+    }
+
+    private void ReadDefeats()
+    {
+        string requestLink = "https://citmalumnes.upc.es/~victormb3/DEFEATSREADER.php";
+
+        string filePath = Application.dataPath + "/JSONResponse/defeats.json";
         StartCoroutine(PHPWebRequest(requestLink, filePath));
     }
 }
