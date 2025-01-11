@@ -17,7 +17,6 @@ Shader "Unlit/HeatmapsSHADER"
 
       _Diameter("Diameter",Range(0,10)) = 5.0
       _Strength("Strength",Range(.1,4)) = 1.0
-      _PulseSpeed("Pulse Speed",Range(0,5)) = 0
 
     }
     SubShader
@@ -64,8 +63,6 @@ Shader "Unlit/HeatmapsSHADER"
             float _Diameter;
             float _Strength;
 
-            float _PulseSpeed;
-
             v2f vert (appdata v)
             {
                 v2f o;
@@ -78,7 +75,7 @@ Shader "Unlit/HeatmapsSHADER"
 
             float3 colors[5]; //colors for point ranges
             float point_ranges[5];  //ranges of values used to determine color values
-            float _Hits[4 * 32]; //passed in array of pointranges 4floats/point, x,y,z,intensity
+            float _Hits[3 * 256]; //passed in array of pointranges 3 floats/point: x,y,z
             int _HitCount = 0;
 
             void initalize()
@@ -144,10 +141,9 @@ Shader "Unlit/HeatmapsSHADER"
                 float total_weight = 0.0;
                 for (float i = 0.0; i < _HitCount; i++)
                 {
-                  float3 work_pt = float3(_Hits[i * 4], _Hits[i * 4 + 1], _Hits[i * 4 + 2]);
-                  float pt_intensity = _Hits[i * 4 + 3];
+                  float3 work_pt = float3(_Hits[i * 3], _Hits[i * 3 + 1], _Hits[i * 3 + 2]);
 
-                  total_weight += 0.5 * distsq(world_pos, work_pt) * pt_intensity * _Strength * (1 + sin(_Time.y * _PulseSpeed));
+                  total_weight += 0.5 * distsq(world_pos, work_pt) * _Strength;
                 }
 
                 return col + float4(getHeatForPixel(total_weight), .5);

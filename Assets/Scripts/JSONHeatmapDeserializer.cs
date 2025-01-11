@@ -57,6 +57,26 @@ public class HMRootHits
 	public HMHit[] hits;
 }
 
+// ---------------------------------------------------
+
+[Serializable]
+public class HMDefeat
+{
+	public int defeat_id;
+	public float pos_x;
+	public float pos_y;
+	public float pos_z;
+	public float time;
+}
+
+[Serializable]
+public class HMRootDefeats
+{
+	public HMDefeat[] defeats;
+}
+
+// ---------------------------------------------------
+
 public static class JSONHeatmapDeserializer
 {
 	public static HMRootPositions DeserializePositionsJSON()
@@ -94,4 +114,17 @@ public static class JSONHeatmapDeserializer
 
 		return hits;
 	}
+
+	public static HMRootDefeats DeserializeDefeatsJSON()
+	{
+		string filePath = Application.dataPath + "/JSONResponse/defeats.json";
+		string jsonString = "{\"defeats\":" + File.ReadAllText(filePath) + "}";
+
+		Debug.Log(jsonString);
+
+		HMRootDefeats defeats = JsonUtility.FromJson<HMRootDefeats>(jsonString);
+
+		return defeats;
+	}
+
 }

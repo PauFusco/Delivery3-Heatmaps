@@ -12,8 +12,6 @@ public class HeatmapsWindow : EditorWindow
 
     List<Vector3> positions = new List<Vector3>();
 
-    List<GameObject> heatmapObjects = new List<GameObject>();
-
 	HeatmapController hmController = new HeatmapController();
 
 	Material heatmapMaterial;
@@ -35,7 +33,7 @@ public class HeatmapsWindow : EditorWindow
 
 		if (heatmapMaterial == null) { return; }
 
-		if (GUILayout.Button("Generate Heatmap")) 
+		if (GUILayout.Button("Generate Heatmap (Max 256 points)")) 
 		{
 			hmController.PrepareHeatmap(heatmapMaterial);
 			GenerateHeatmap(); 
@@ -60,13 +58,28 @@ public class HeatmapsWindow : EditorWindow
 			}
 		}
 
+		if (GUILayout.Button("Deserialize Defeats"))
+		{
+			positions.Clear();
+			HMRootDefeats hmDefeats = JSONHeatmapDeserializer.DeserializeDefeatsJSON();
+			foreach (var defeat in hmDefeats.defeats)
+			{
+				positions.Add(new Vector3(defeat.pos_x, defeat.pos_y, defeat.pos_z));
+			}
+		}
+
+		damagerType = (DamagerType)EditorGUILayout.EnumPopup("Damager Type:", damagerType);
+
 		if (GUILayout.Button("Deserialize Deaths"))
 		{
 			positions.Clear();
 			HMRootDeaths hmDeaths = JSONHeatmapDeserializer.DeserializeDeathsJSON();
 			foreach (var death in hmDeaths.deaths)
 			{
-				positions.Add(new Vector3(death.pos_x, death.pos_y, death.pos_z));
+				if (damagerType == DamagerType.ANY || death.reason_of_death == damagerType)
+				{
+					positions.Add(new Vector3(death.pos_x, death.pos_y, death.pos_z));
+				}
 			}
 		}
 
@@ -76,7 +89,10 @@ public class HeatmapsWindow : EditorWindow
 			HMRootHits hmHits = JSONHeatmapDeserializer.DeserializeHitsJSON();
 			foreach (var hit in hmHits.hits)
 			{
-				positions.Add(new Vector3(hit.pos_x, hit.pos_y, hit.pos_z));
+				if (damagerType == DamagerType.ANY || hit.reason_of_hit == damagerType)
+				{
+					positions.Add(new Vector3(hit.pos_x, hit.pos_y, hit.pos_z));
+				}
 			}
 		}
 
@@ -102,11 +118,6 @@ public class HeatmapsWindow : EditorWindow
 
 	void GenerateHeatmap()
     {
-        for (int i = heatmapObjects.Count - 1; i >= 0; --i)
-        {
-            DestroyImmediate(heatmapObjects[i], false);
-		}
-
 		foreach (var p in positions)
 		{
 			hmController.AddHitPoint(p.x, p.y, p.z);
