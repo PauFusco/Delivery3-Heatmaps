@@ -10,7 +10,7 @@ public class PHPReader : MonoBehaviour
         ReadHits();
         ReadDeaths();
         ReadPositions();
-        ReadAttacks();
+        //ReadAttacks();
         ReadDefeats();
     }
 

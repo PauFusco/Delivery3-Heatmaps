@@ -45,10 +45,6 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
         {
             Debug.Log(webRequest.downloadHandler.text);
         }
-        else
-        {
-            Debug.Log(webRequest.downloadHandler.text);
-        }
     }
 
     private void SendDamaged(DamagerType damagedType, Vector3 position, float time, DamagerType type)

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
 #if UNITY_EDITOR
+
 using UnityEditor;
+
 #endif
 
 namespace Gamekit3D
@@ -27,7 +29,8 @@ Also Remember to place that object in a layer that collide with what you want to
             if (d != null && !d.isInvulnerable)
             {
                 DamagerType tempDamagerType = DamagerType.UNDEFINED;
-                if (TryGetComponent<Damager>(out var damager)) { tempDamagerType = damager.type; }
+                Damager damager = GetComponentInParent<Damager>();
+                if (damager != null) { tempDamagerType = damager.type; }
 
                 Damageable.DamageMessage message = new()
                 {
@@ -50,6 +53,7 @@ Also Remember to place that object in a layer that collide with what you want to
     }
 
 #if UNITY_EDITOR
+
     [CustomPropertyDrawer(typeof(HelpBoxAttribute))]
     public class HelpBoxDrawer : PropertyDrawer
     {
@@ -65,5 +69,6 @@ Also Remember to place that object in a layer that collide with what you want to
             EditorGUI.HelpBox(position, property.stringValue, MessageType.Info);
         }
     }
+
 #endif
 }
