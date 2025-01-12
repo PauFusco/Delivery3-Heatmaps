@@ -1,5 +1,5 @@
 # Delivery3-Heatmaps
- 
+ [Repo Link](https://github.com/PauFusco/Delivery3-Heatmaps/)
 ## Instructions
 ### How to Generate Data
 The project comes with pre-made data. To visualize this data go to [How to Visualize Data](https://github.com/PauFusco/Delivery3-Heatmaps?tab=readme-ov-file#how-to-visualize-data).
@@ -28,5 +28,3 @@ Pressing the **Clear Heatmap** Button will delete the heatmap projection on the 
 
 ## Extra Info
 All the PHP files used to post the gameplay information to the MySQL database are inside _Assets/Scripts/PHP_ directory and organized by their use (Reading or Writing the database)
-
-[Repo Link](https://github.com/PauFusco/Delivery3-Heatmaps/)
