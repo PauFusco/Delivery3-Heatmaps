@@ -2,7 +2,7 @@
  
 ## Instructions
 ### How to Generate Data
-The project comes with pre-made data. To visualize this data go to "How to Visualize Data".
+The project comes with pre-made data. To visualize this data go to [How to Visualize Data](https://github.com/PauFusco/Delivery3-Heatmaps/edit/main/README.md#how-to-visualize-data).
 
 To create your own data, first go to _Assets/ExampleScene.unity_. There select the "PHPConnection" Object of the scene. In the inspector you will see an Editor Button **Truncate All**. **Pressing this button will _DELETE ALL_ the example data**, letting you generate yours. 
 
