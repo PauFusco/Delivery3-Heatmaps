@@ -28,4 +28,5 @@ Pressing the **Clear Heatmap** Button will delete the heatmap projection on the 
 
 ## Extra Info
 [Repo Link](https://github.com/PauFusco/Delivery3-Heatmaps/)
+
 All the PHP files used to post the gameplay information to the MySQL database are inside _Assets/Scripts/PHP_ directory and organized by their use (Reading or Writing the database)
