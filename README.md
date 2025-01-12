@@ -6,7 +6,7 @@ The project comes with pre-made data. To visualize this data go to [How to Visua
 
 To create your own data, first go to _Assets/ExampleScene.unity_. There select the "PHPConnection" Object of the scene. In the inspector you will see an Editor Button **Truncate All**. **Pressing this button will _DELETE ALL_ the example data**, letting you generate yours. 
 
-After playing, you have to press the Editor Button **Create All JSONs** to download the data and have it locally to use it for the visualization. Not downloading the data after playing will leave you with the previous data.
+After playing, press the Editor Button **Create All JSONs** to download the data to use it for the visualization. **This will _OVERRIDE_ the data those files had**.
 
 ### How to Visualize Data
 In order to visualize the game data, open _Assets/Heatmaps/Editor/LevelToHeatmap.unity_. Open the Tools>Heatmaps (Top-Bar Menu). This will open the Heatmaps window. In this window input the _Assets/Heatmaps/HeatmapsMAT.mat_ material in the **Heatmap Material** variable. This will give you Editor Buttons to deserialize the JSON information.
