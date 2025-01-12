@@ -25,3 +25,7 @@ Pressing the **Clear Heatmap** Button will delete the heatmap projection on the 
 - Download JSON-encoded information from a MySQL database to JSON files
 - Deserialize JSON files data
 - Generate Heatmaps with deserialized data to visualize gameplay data on the surface of the level it was generated in
+
+## Extra Info
+[Repo Link](https://github.com/PauFusco/Delivery3-Heatmaps/)
+All the PHP files used to post the gameplay information to the MySQL database are inside _Assets/Scripts/PHP_ directory and organized by their use (Reading or Writing the database)
