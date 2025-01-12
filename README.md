@@ -18,7 +18,7 @@ The variables that can be shown in the map are:
 - _Defeats_: The positions of the enemies where they were defeated.
 - _Deaths_: The position of the player when they were killed. This can be filtered with the **Damager Type** Dropdown Menu.
 - _Hits_: The position of the player when they were damaged. This can be filtered with the **Damager Type** Dropdown Menu.
-Pressing the "Clear Heatmap" Button will delete the heatmap projection on the level.
+Pressing the **Clear Heatmap** Button will delete the heatmap projection on the level.
 
 ## Features
 - Upload gameplay data to a MySQL database
