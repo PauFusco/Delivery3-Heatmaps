@@ -5,14 +5,6 @@ using UnityEngine.Networking;
 
 public class PHPReader : MonoBehaviour
 {
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ReadAll();
-        }
-    }
-
     public void ReadAll()
     {
         ReadHits();

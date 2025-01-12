@@ -142,38 +142,11 @@ public class PHPConnection : MonoBehaviour, IMessageReceiver
         StartCoroutine(PHPWebRequest(form, requestLink));
     }
 
-    public void SendJump(Vector3 position, float time)
+    public void TruncateAll()
     {
-        string sendablePositionX = position.x.ToString(CultureInfo.InvariantCulture);
-        string sendablePositionY = position.y.ToString(CultureInfo.InvariantCulture);
-        string sendablePositionZ = position.z.ToString(CultureInfo.InvariantCulture);
-        string sendableTime = time.ToString(CultureInfo.InvariantCulture);
-
         WWWForm form = new();
-        form.AddField("X", sendablePositionX);
-        form.AddField("Y", sendablePositionY);
-        form.AddField("Z", sendablePositionZ);
-        form.AddField("Time", sendableTime);
 
-        string requestLink = "";
-
-        StartCoroutine(PHPWebRequest(form, requestLink));
-    }
-
-    public void SendAttack(Vector3 position, float time)
-    {
-        string sendablePositionX = position.x.ToString(CultureInfo.InvariantCulture);
-        string sendablePositionY = position.y.ToString(CultureInfo.InvariantCulture);
-        string sendablePositionZ = position.z.ToString(CultureInfo.InvariantCulture);
-        string sendableTime = time.ToString(CultureInfo.InvariantCulture);
-
-        WWWForm form = new();
-        form.AddField("X", sendablePositionX);
-        form.AddField("Y", sendablePositionY);
-        form.AddField("Z", sendablePositionZ);
-        form.AddField("Time", sendableTime);
-
-        string requestLink = "https://citmalumnes.upc.es/~victormb3/ATTACK.php";
+        string requestLink = "https://citmalumnes.upc.es/~victormb3/TRUNCATEALL.php";
 
         StartCoroutine(PHPWebRequest(form, requestLink));
     }
